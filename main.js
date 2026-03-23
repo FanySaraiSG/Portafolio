@@ -8,7 +8,7 @@ const misPracticas = {
     "p1": { repo: "Practica-Geocalizacion", video: "https://www.youtube.com/embed/5QDSwZ3MMvE", pdf: "docs/Documentacion_1.pdf", web: "https://fanysaraisg.github.io/Practica-Geocalizacion/" },
     "p2": { repo: "Practica-RedSocial", video: "https://www.youtube.com/embed/jqHey-IPYr0", pdf: "docs/Documentacion_2.pdf", web: "https://fanysaraisg.github.io/Practica-RedSocial/" },
     "p3": { repo: "Dulceeees", video: "https://www.youtube.com/embed/Ul9RmjgA0no", pdf: "docs/Documentacion_3.pdf", web: "https://fanysaraisg.github.io/Dulceeees/" },
-    "p4": { repo: "Stremer-y-base", video: "https://www.youtube.com/embed/ID4", pdf: "docs/Docuemntacion_4.pdf", web: "https://practica-sbd.infinityfreeapp.com/?i=1" },
+    "p4": { repo: "Stremer-y-base", video: "https://www.youtube.com/embed/j1DUjXGfdlQ", pdf: "docs/Docuemntacion_4.pdf", web: "https://practica-sbd.infinityfreeapp.com/?i=1" },
     "p5": { repo: "render", video: "https://www.youtube.com/embed/-u5XCDwL0sA", pdf: "docs/Documentacion_5.pdf", web: "https://fanysaraisg.github.io/render/" },
     "p6": { repo: "tienda", video: "https://www.youtube.com/embed/GacMpZR0QnE", pdf: "docs/Documentacion_6.pdf", web: "https://fanysaraisg.github.io/tienda/" }
 };
