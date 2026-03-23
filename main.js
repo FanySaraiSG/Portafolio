@@ -104,3 +104,26 @@ function cerrarSesion() { sessionStorage.removeItem('auth'); window.location.hre
 function toggleFull(id) { document.getElementById(id).classList.toggle('fullscreen'); }
 
 cargarPractica('p1');
+
+// --- SISTEMA DE CIERRE POR INACTIVIDAD (10 MINUTOS) ---
+
+let temporizadorInactividad;
+const TIEMPO_LIMITE_MS = 10 * 60 * 1000; // 10 minutos convertidos a milisegundos
+
+function reiniciarTemporizador() {
+    // Si el temporizador ya estaba corriendo, lo limpiamos para empezar de nuevo
+    clearTimeout(temporizadorInactividad);
+    
+    // Iniciamos la cuenta regresiva
+    temporizadorInactividad = setTimeout(() => {
+        alert("Tu sesión ha expirado por inactividad (10 minutos).");
+        cerrarSesion(); // Llama a la función que ya tienes creada
+    }, TIEMPO_LIMITE_MS);
+}
+
+// Escuchamos cualquier actividad del usuario
+window.onload = reiniciarTemporizador; // Iniciar al cargar la página
+document.onmousemove = reiniciarTemporizador; // Al mover el mouse
+document.onkeypress = reiniciarTemporizador; // Al presionar una tecla
+document.onclick = reiniciarTemporizador;    // Al hacer clic
+document.onscroll = reiniciarTemporizador;   // Al hacer scroll
