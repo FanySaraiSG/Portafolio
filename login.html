@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatFolio | Acceso Administrativo</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/buffer.js"></script>
+    <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/index.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --rojo: #c0392b; --rojo-hover: #e74c3c; --oscuro: #1a1a1a; }
+        body, html { height: 100%; margin: 0; font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; }
+        .login-card { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 30px; width: 380px; text-align: center; border-top: 8px solid var(--rojo); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .avatar-gato { width: 90px; height: 90px; background: var(--oscuro); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; margin: -85px auto 20px; border: 5px solid var(--rojo); }
+        input { width: 100%; padding: 14px; margin-bottom: 20px; border: 2px solid #eee; border-radius: 12px; font-size: 16px; transition: 0.3s; }
+        input:focus { border-color: var(--rojo); outline: none; }
+        .btn-principal { width: 100%; padding: 15px; background: var(--rojo); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .btn-principal:hover { background: var(--rojo-hover); transform: translateY(-2px); }
+        .hidden { display: none; }
+        #qrcode { background: white; padding: 15px; display: inline-block; margin: 20px 0; border-radius: 10px; }
+        .error-msg { color: var(--rojo); font-size: 0.8rem; margin-top: -10px; margin-bottom: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card" id="step1">
+        <div class="avatar-gato">🐈‍⬛</div>
+        <h2 style="margin-bottom: 20px;">CatFolio Admin</h2>
+        <input type="text" id="user" placeholder="Usuario">
+        <input type="password" id="pass" placeholder="Contraseña">
+        <button class="btn-principal" onclick="nextStep()">Siguiente</button>
+    </div>
+
+    <div class="login-card hidden" id="step2">
+        <h2 style="color: var(--rojo);">Verificación 2FA</h2>
+        <p style="font-size: 0.8rem; color: #666;">Escanea con Google Authenticator</p>
+        <div id="qrcode"></div>
+        <p id="error-2fa" class="error-msg">Código incorrecto o expirado</p>
+        <input type="number" id="pin" placeholder="000000" style="text-align:center; letter-spacing:8px; font-size: 24px;">
+        <button class="btn-principal" onclick="validateTOTP()">Verificar Entrar</button>
+    </div>
+
+    <script>
+        const ADMIN_DATA = { user: "FanyAdmin", pass: "12345" };
+        // Este secreto es la llave. Si la cambias, el QR cambia.
+        const SECRET_2FA = "FANY7SARAI7CAT7LOVER7"; 
+
+        function nextStep() {
+            const u = document.getElementById("user").value;
+            const p = document.getElementById("pass").value;
+
+            if (u === ADMIN_DATA.user && p === ADMIN_DATA.pass) {
+                document.getElementById("step1").classList.add("hidden");
+                document.getElementById("step2").classList.remove("hidden");
+                
+                // Generar URL del QR para apps de autenticación
+                const otpauth = `otpauth://totp/CatFolio:Fany?secret=${SECRET_2FA}&issuer=CatFolioPro`;
+                
+                new QRCode(document.getElementById("qrcode"), {
+                    text: otpauth,
+                    width: 160,
+                    height: 160
+                });
+            } else {
+                alert("Usuario o contraseña incorrectos");
+            }
+        }
+
+        function validateTOTP() {
+            const pin = document.getElementById("pin").value;
+            const errorMsg = document.getElementById("error-2fa");
+
+            // Usamos la librería otplib para verificar el código actual
+            // window.otplib.authenticator usa el tiempo actual para validar
+            const isValid = otplib.authenticator.check(pin, SECRET_2FA);
+
+            if (isValid) {
+                errorMsg.style.display = "none";
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#c0392b', '#ffffff'] });
+                sessionStorage.setItem('auth', 'true');
+                
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1500);
+            } else {
+                errorMsg.style.display = "block";
+                document.getElementById("pin").value = "";
+                document.getElementById("pin").style.borderColor = "red";
+            }
+        }
+    </script>
+</body>
+</html>

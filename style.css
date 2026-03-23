@@ -1,0 +1,76 @@
+:root {
+    --rojo-oscuro: #8b1a10;
+    --rojo-principal: #c0392b;
+    --rojo-claro: #e74c3c;
+    --fondo: #f5f6f7;
+    --vscode-bg: #1e1e1e;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: var(--fondo); }
+.app-container { display: flex; width: 100vw; height: 100vh; overflow: hidden; }
+
+/* Sidebar */
+.sidebar { width: 260px; background: var(--rojo-oscuro); color: white; padding: 20px; flex-shrink: 0; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: bold; margin-bottom: 30px; }
+.btn-practica { background: transparent; border: none; color: #ffcccc; padding: 12px; margin-bottom: 5px; text-align: left; cursor: pointer; width: 100%; border-radius: 8px; transition: 0.3s; }
+.btn-practica.active { background: var(--rojo-claro); color: white; font-weight: bold; }
+
+/* Header */
+.content { flex-grow: 1; padding: 25px; overflow-y: auto; }
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.title-section h1 { font-size: 1.6rem; color: var(--rojo-oscuro); }
+
+.nav-actions { display: flex; align-items: center; gap: 15px; }
+.project-links { display: flex; gap: 10px; background: #f0f0f0; padding: 5px; border-radius: 12px; }
+
+.action-btn {
+    padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
+    display: flex; align-items: center; gap: 8px; transition: 0.3s; border: none; cursor: pointer;
+}
+.github-style { background: #24292e; color: white; }
+.web-style { background: var(--rojo-principal); color: white; }
+.logout-style { background: #fee2e2; color: #dc2626; width: 42px; height: 42px; justify-content: center; border-radius: 50%; }
+
+/* Estilos de las Pestañas (Tab Menu) */
+.tab-menu {
+    display: flex; gap: 10px; margin-bottom: 20px; background: #fff; padding: 8px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.tab-btn {
+    flex: 1; padding: 12px; border: none; background: #f8f9fa; border-radius: 8px; cursor: pointer;
+    font-weight: 600; color: #555; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.tab-btn.active { background: var(--rojo-principal); color: white; }
+.tab-btn:hover:not(.active) { background: #eee; }
+
+.tab-content { animation: fadeIn 0.4s ease; }
+.hidden { display: none !important; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Cards y Media */
+.card { background: white; padding: 20px; border-radius: 12px; border-top: 4px solid var(--rojo-principal); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+.media-box { width: 100%; height: 500px; background: #000; border-radius: 8px; overflow: hidden; }
+iframe, embed { width: 100%; height: 100%; border: none; }
+
+/* Editor de código */
+.code-container { display: flex; height: 600px; background: var(--vscode-bg); border-radius: 10px; overflow: hidden; }
+.file-explorer { width: 240px; background: #252526; padding: 10px; overflow-y: auto; color: #aaa; border-right: 1px solid #333; }
+.file-item { padding: 8px; cursor: pointer; border-radius: 4px; font-size: 0.85rem; }
+.file-item:hover, .active-file { background: #37373d; color: white; }
+.active-file { border-left: 3px solid var(--rojo-claro); }
+.code-viewer { flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; }
+#file-name-display { background: #2d2d2d; color: #888; padding: 10px 15px; font-size: 0.75rem; }
+pre { margin: 0 !important; background: transparent !important; flex-grow: 1; overflow: auto !important; }
+
+/* Fullscreen */
+.fullscreen { position: fixed !important; top:0; left:0; width:100% !important; height:100% !important; z-index:999; background:white; }

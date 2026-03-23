@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatFolio Pro - FanySaraiSG</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        if (sessionStorage.getItem('auth') !== 'true') { window.location.href = "login.html"; }
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo"><i class="fas fa-cat fa-2x"></i> <span>CatFolio</span></div>
+            <nav id="menu-practicas">
+                <button class="btn-practica active" data-repo="p1"><i class="fas fa-paw"></i> Práctica 1</button>
+                <button class="btn-practica" data-repo="p2"><i class="fas fa-paw"></i> Práctica 2</button>
+                <button class="btn-practica" data-repo="p3"><i class="fas fa-paw"></i> Práctica 3</button>
+                <button class="btn-practica" data-repo="p4"><i class="fas fa-paw"></i> Práctica 4</button>
+                <button class="btn-practica" data-repo="p5"><i class="fas fa-paw"></i> Práctica 5</button>
+                <button class="btn-practica" data-repo="p6"><i class="fas fa-paw"></i> Práctica 6</button>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header class="main-header">
+                <div class="title-section">
+                    <h1 id="titulo-practica">Selecciona una práctica</h1>
+                </div>
+                
+                <div class="nav-actions">
+                    <div class="project-links">
+                        <a href="#" id="repo-link" class="action-btn github-style" target="_blank">
+                            <i class="fab fa-github"></i> <span>Código GitHub</span>
+                        </a>
+                        <a href="#" id="web-link" class="action-btn web-style" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> <span>Pagina Web</span>
+                        </a>
+                    </div>
+                    <div class="user-actions">
+                        <button onclick="cerrarSesion()" class="action-btn logout-style" title="Cerrar Sesión">
+                            <i class="fas fa-power-off"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="tab-menu">
+                <button class="tab-btn active" onclick="switchTab('video')">
+                    <i class="fas fa-video"></i> Video Explicado
+                </button>
+                <button class="tab-btn" onclick="switchTab('doc')">
+                    <i class="fas fa-file-pdf"></i> Documentación
+                </button>
+                <button class="tab-btn" onclick="switchTab('code')">
+                    <i class="fas fa-code"></i> Códigos
+                </button>
+            </div>
+
+            <div id="content-display">
+                <div id="tab-video" class="tab-content">
+                    <div class="card">
+                        <div id="video-contenedor" class="media-box"></div>
+                    </div>
+                </div>
+
+                <div id="tab-doc" class="tab-content hidden">
+                    <div class="card" id="card-doc">
+                        <div class="card-header">
+                            <h3>Visualizador de PDF</h3>
+                            <button class="btn-expand" onclick="toggleFull('card-doc')"><i class="fas fa-expand"></i></button>
+                        </div>
+                        <div id="doc-content" class="media-box"></div>
+                    </div>
+                </div>
+
+                <div id="tab-code" class="tab-content hidden">
+                    <div class="card code-card" id="card-code">
+                        <div class="card-header">
+                            <h3>Explorador de Archivos</h3>
+                            <button class="btn-expand" onclick="toggleFull('card-code')"><i class="fas fa-expand"></i></button>
+                        </div>
+                        <div class="code-container">
+                            <aside class="file-explorer" id="lista-archivos"></aside>
+                            <section class="code-viewer">
+                                <div id="file-name-display">Selecciona un archivo</div>
+                                <pre><code id="codigo-real" class="language-javascript"></code></pre>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
